@@ -6,17 +6,15 @@
 
 {% block content %}
     <h1>Books</h1> 
-    {% if login %}
-    <a href="{% url 'books.create' %}"> <button> Create </button></a>
-    {% endif %}
+
     {% if list_books %}
-    <table>
+    <table class="table" >
         {% for book in list_books %}
         <tr>
             <td>{{book.title}}</td>
             {%  if login %}
-            <td> <a href="{% url 'books.update' pk=book.id %}"> <button>update</button></a></td>
-            <td> <a href="{% url 'books.delete' pk=book.id %}"> <button>delete</button></a></td>
+            <td> <a class="btn btn-primary" href="{% url 'books.update' pk=book.id %}"> Update</a></td>
+            <td> <a class="btn btn-danger" href="{% url 'books.delete' pk=book.id %}"> Delete</a></td>
             {% endif %}
         </tr>
         {% endfor %}

@@ -3,19 +3,27 @@
 {%  block content %}
     {% if not book %}
         <h2> Create Book</h2>
-        <form action="" method="POST">
+
+        <form action="{% url 'books.create' %}"class="form col-md-6" method="post">
             {% csrf_token %}
-            <label for="title">Book Name</label>
-            <input type="text" name="title">
-            <button type="submit">create</button> 
+            <div class="mb-3">
+              <label for="title" class="form-label">Book Title</label>
+              <input type="text" class="form-control" id="title" name="title">
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
         </form>
+
+
     {% else %}
         <h2> Update Book </h2>
-        <form action="{% url 'books.update' book.id %}" method="POST">
+        
+        <form action="{% url 'books.update' book.id %}" class="form col-md-6" method="post">
             {% csrf_token %}
-            <label for="title">Book Name</label>
-            <input type="text" name="title" value="{{book.title}}">
-            <button type="submit">Update</button> 
+            <div class="mb-3">
+                <label for="title" class="form-label">Book Title</label>
+                <input type="text" class="form-control" id="title" name="title" value="{{book.title}}" >
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
         </form>
     {% endif %}
 

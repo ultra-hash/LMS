@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import books
-from login.views import verify_login
+from login.views import login, verify_login
 
 # Create your views here.
     # admin 
@@ -23,7 +23,7 @@ def create(request):
         book = books.objects.create(title=title)
         return redirect("books.list")
     else:
-        return render(request, "books/books_form.html", {})
+        return render(request, "books/books_form.html", {'login': verify_login(request)})
 
 def update(request, pk):
     if not verify_login(request):
