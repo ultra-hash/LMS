@@ -50,7 +50,7 @@ def update(request, pk):
         messages.success(request, f"{prev} book updated to {newTitle} successfully")
         return redirect('books.list')
     else:
-        return render(request, "books/books_form.html", {'book':book})
+        return render(request, "books/books_form.html", {'book':book, 'login':verify_login(request)})
 
 def delete(request, pk):
     if not verify_login(request):

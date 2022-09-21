@@ -8,13 +8,26 @@
     <h1>Books</h1> 
 
     {% if list_books %}
-    <table class="table" >
-        {% for book in list_books %}
+    <table class="table table-responsive-md" >
+
+        <thead>
+            <tr>
+                <th>Book ID</th>
+                <th>Title of The Book</th>
+                {%  if login %}
+                <th>Update</th>
+                <th>Delete</th>
+                {% endif %}
+            </tr>
+        </thead>
+        
+        {% for book in list_books%}
         <tr>
+            <td>{{book.id}}</td>
             <td>{{book.title}}</td>
             {%  if login %}
-            <td> <a class="btn btn-primary" href="{% url 'books.update' pk=book.id %}"> Update</a></td>
-            <td> <a class="btn btn-danger" href="{% url 'books.delete' pk=book.id %}"> Delete</a></td>
+            <td> <a class="btn btn-primary btn-sm" href="{% url 'books.update' pk=book.id %}"> Update</a></td>
+            <td> <a class="btn btn-danger btn-sm" href="{% url 'books.delete' pk=book.id %}"> Delete</a></td>
             {% endif %}
         </tr>
         {% endfor %}
