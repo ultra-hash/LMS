@@ -19,12 +19,13 @@ def create(request):
     if not verify_login(request):
         return redirect('login.login')
     
-    if title == "" or title == None:
-            messages.info(request, "Title con't be empty")
-            return redirect('books.create')
+    
 
     if request.method == 'POST':
         title = request.POST['title']
+        if title == "" or title == None:
+            messages.info(request, "Title can't be empty")
+            return redirect('books.create')
         book = books.objects.create(title=title)
         messages.info(request, f"{title} book added successfully")
         return redirect("books.list")
