@@ -3,7 +3,7 @@ from .models import adminAccounts
 # Create your views here.
 
 def login(request):
-    return 
+    return render(request, "login/login.html", {})
 
 def register(request):
-    return 
+    return render(request, "login/register.html", {})

@@ -1,9 +1,11 @@
 <form>
     {% csrf_token %}
-    <label>email</label>
-    <input type="email" name="'email" />
-    <label>password</label>
-    <input type="password" name="password" />
+    <label for="username">Username</label>
+    <input type="text" name="username" id="password" />
+    <label for="email">email</label>
+    <input type="email" name="email" id="email" />
+    <label for="password">password</label>
+    <input type="password" name="password" id="password"/>
     <button type="submit">Sign up</button>
     
 </form>
