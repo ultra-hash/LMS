@@ -1,3 +1,4 @@
+from email import message
 from django.shortcuts import render, redirect
 from .models import adminAccounts
 from django.contrib import messages
@@ -20,4 +21,17 @@ def login(request):
         return render(request, "login/login.html", {})
 
 def register(request):
-    return render(request, "login/register.html", {})
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+
+        if not adminAccounts.objects.filter(email=email).exists():
+            admin = adminAccounts.objects.create(username=username, email=email, password=password)
+            messages.success(request, "account created successfully")
+            return redirect('login.login')
+        else:
+            messages.info(request, "email already registered")
+            return redirect('request')
+    else:
+        return render(request, "login/register.html", {})
