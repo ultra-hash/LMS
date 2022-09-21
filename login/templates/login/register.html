@@ -1,3 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>LMS - Rgister Page</title>
+{% endblock %}
+
+{% block content %}
 <form method="POST">
     {% csrf_token %}
     <label for="username">Username</label>
@@ -10,8 +17,4 @@
     
 </form>
 
-{% if messages %}
-{% for message in messages %}
-{{message}}
-{% endfor %}
-{% endif %}
+{% endblock %}

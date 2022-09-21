@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}
+    <title> LMS - Books List</title>
+{% endblock %}
+
+{% block content %}
     <h1>Books</h1> 
     {% if list_books %}
     <table>
@@ -19,5 +17,4 @@
     {% else %}
         <h4> No Books Available</h4>
     {% endif %}
-</body>
-</html>
+{% endblock %}
