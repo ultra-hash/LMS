@@ -4,6 +4,11 @@ from django.http import HttpResponse
 from .models import books
 
 # Create your views here.
+    # admin 
+        # create , update, list , delete
+    # student
+        # list
+
 
 def index(request):
     return HttpResponse('Hello From Books')
