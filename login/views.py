@@ -4,6 +4,9 @@ from .models import adminAccounts
 from django.contrib import messages
 # Create your views here.
 
+def index(request):
+    return redirect('books.list')
+
 def login(request):
     if request.method == 'POST':
         email = request.POST['email']
