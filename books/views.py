@@ -23,5 +23,6 @@ def delete(request):
     return
 
 def list(request):
-    return
+    list_books = books.objects.all()
+    return render(request, "books/books_list.html", {'list_books': list_books})
     
