@@ -7,3 +7,9 @@
     <button type="submit">Login</button>
 
 </form>
+
+{% if messages %}
+{% for message in messages %}
+{{message}}
+{% endfor %}
+{% endif %}
