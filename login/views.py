@@ -1,4 +1,3 @@
-from email import message
 from django.shortcuts import render, redirect
 from .models import adminAccounts
 from django.contrib import messages
@@ -38,3 +37,14 @@ def register(request):
             return redirect('request')
     else:
         return render(request, "login/register.html", {})
+
+
+def logout(request):
+    try:
+        if request.session['login']:
+            del request.session['login']
+            messages.info(request, "logout successfull")
+    except KeyError:
+        pass
+    finally:
+        return redirect('books.list')
