@@ -52,6 +52,7 @@ def delete(request, pk):
     return redirect("books.list")
 
 def list(request):
+    login = verify_login(request)
     list_books = books.objects.all()
-    return render(request, "books/books_list.html", {'list_books': list_books})
+    return render(request, "books/books_list.html", {'list_books': list_books, 'login': login})
     
