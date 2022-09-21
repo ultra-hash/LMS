@@ -32,9 +32,12 @@ def update(request, pk):
     else:
         return render(request, "books/books_form.html", {'book':book})
 
-def delete(request):
-    
-    return
+def delete(request, pk):
+    if books.objects.filter(pk=pk).exists():
+        book = books.objects.get(pk=pk)
+        book.delete()
+        book.save()
+    return redirect("books.list")
 
 def list(request):
     list_books = books.objects.all()
