@@ -7,6 +7,9 @@ def index(request):
     return redirect('books.list')
 
 def login(request):
+    if verify_login(request):
+        return redirect('books.list')
+
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -23,6 +26,9 @@ def login(request):
         return render(request, "login/login.html", {})
 
 def register(request):
+    if verify_login(request):
+        return redirect('books.list')
+        
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
