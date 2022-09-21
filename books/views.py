@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import books
 from login.views import login, verify_login
+from django.contrib import messages
 
 # Create your views here.
     # admin 
@@ -17,10 +18,15 @@ def index(request):
 def create(request):
     if not verify_login(request):
         return redirect('login.login')
+    
+    if title == "" or title == None:
+            messages.info(request, "Title con't be empty")
+            return redirect('books.create')
 
     if request.method == 'POST':
         title = request.POST['title']
         book = books.objects.create(title=title)
+        messages.info(request, f"{title} book added successfully")
         return redirect("books.list")
     else:
         return render(request, "books/books_form.html", {'login': verify_login(request)})
@@ -30,14 +36,17 @@ def update(request, pk):
         return redirect('login.login')
 
     if books.objects.filter(pk=pk).exists():
-            book = books.objects.get(pk=pk)
+        book = books.objects.get(pk=pk)
     else:
+        messages.info(request, f"book doesn't exists")
         return redirect('books.list')
 
     if request.method == 'POST':
         newTitle = request.POST['title']
+        prev = book.title
         book.title = newTitle
         book.save()
+        messages.success(request, f"{prev} book updated to {newTitle} successfully")
         return redirect('books.list')
     else:
         return render(request, "books/books_form.html", {'book':book})
@@ -49,6 +58,8 @@ def delete(request, pk):
     if books.objects.filter(pk=pk).exists():
         book = books.objects.get(pk=pk)
         book.delete()
+    else:
+        messages.info(request, f"book doesn't exists")
     return redirect("books.list")
 
 def list(request):
