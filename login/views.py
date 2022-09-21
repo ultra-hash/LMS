@@ -34,7 +34,7 @@ def register(request):
             return redirect('login.login')
         else:
             messages.info(request, "email already registered")
-            return redirect('request')
+            return redirect('login.register')
     else:
         return render(request, "login/register.html", {})
 
