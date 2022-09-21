@@ -36,7 +36,6 @@ def delete(request, pk):
     if books.objects.filter(pk=pk).exists():
         book = books.objects.get(pk=pk)
         book.delete()
-        book.save()
     return redirect("books.list")
 
 def list(request):
