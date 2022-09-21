@@ -1,7 +1,7 @@
-from asyncio.proactor_events import _ProactorBaseWritePipeTransport
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import books
+from login.views import verify_login
 
 # Create your views here.
     # admin 
@@ -15,6 +15,9 @@ def index(request):
 
 
 def create(request):
+    if not verify_login(request):
+        return redirect('login.login')
+
     if request.method == 'POST':
         title = request.POST['title']
         book = books.objects.create(title=title)
@@ -23,6 +26,8 @@ def create(request):
         return render(request, "books/books_form.html", {})
 
 def update(request, pk):
+    if not verify_login(request):
+        return redirect('login.login')
 
     if books.objects.filter(pk=pk).exists():
             book = books.objects.get(pk=pk)
@@ -38,6 +43,9 @@ def update(request, pk):
         return render(request, "books/books_form.html", {'book':book})
 
 def delete(request, pk):
+    if not verify_login(request):
+        return redirect('login.login')
+        
     if books.objects.filter(pk=pk).exists():
         book = books.objects.get(pk=pk)
         book.delete()

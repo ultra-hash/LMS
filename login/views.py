@@ -48,3 +48,12 @@ def logout(request):
         pass
     finally:
         return redirect('books.list')
+
+
+# return True or False
+def verify_login(request):
+    try:
+        if request.session['login']:
+            return True
+    except KeyError:
+        return False
