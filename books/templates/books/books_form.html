@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    {% if not book %}
+        <h2> Create Book</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="title">Book Name</label>
+            <input type="text" name="title">
+            <button type="submit">create</button> 
+        </form>
+    {% else %}
+        <h2> Update Book </h2>
+        <form action="{% url 'books.update' book.id %}" method="POST">
+            {% csrf_token %}
+            <label for="title">Book Name</label>
+            <input type="text" name="title" value="{{book.title}}">
+            <button type="submit">Update</button> 
+        </form>
+    {% endif %}
+
+</body>
+</html>
